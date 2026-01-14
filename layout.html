@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gov Dashboard | CivicSense AI</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="sidebar-top">
+        <div class="logo-icon" style="background: var(--primary); color: white; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 800; margin-bottom: 20px;">C</div>
+        <h2>Gov Panel</h2>
+        <nav>
+            <a href="/government/complaints">All Complaints</a>
+            <a href="/government/analytics">Analytics</a>
+        </nav>
+    </div>
+
+    <div class="sidebar-bottom">
+        <a href="/logout" class="sidebar-logout">Logout</a>
+    </div>
+</div>
+
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

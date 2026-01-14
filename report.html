@@ -1,0 +1,74 @@
+{% extends "citizen/layout.html" %}
+{% block content %}
+
+<div class="page-header">
+    <h2>Report a Civic Issue</h2>
+    <p>Provide details below to alert the local authorities.</p>
+</div>
+
+<div class="form-card">
+    <form method="POST" enctype="multipart/form-data" class="modern-form">
+        
+        <div class="form-group">
+            <label for="issueSelect">What is the issue?</label>
+            <div class="input-wrapper">
+                <select name="issue" id="issueSelect" required onchange="toggleOtherIssue()">
+                    <option value="">-- Select Issue Type --</option>
+                    <option value="Pothole">🕳️ Pothole</option>
+                    <option value="Garbage">🗑️ Garbage</option>
+                    <option value="Water Leak">💧 Water Leak</option>
+                    <option value="Street Light">💡 Street Light</option>
+                    <option value="Other">📝 Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="otherIssueContainer" style="display:none;" class="form-group animate-fade">
+            <label>Please specify</label>
+            <input type="text" name="other_issue" id="otherIssueInput" placeholder="e.g. Broken bench, fallen tree">
+        </div>
+
+        <div class="form-group">
+            <label>Location / Address</label>
+            <textarea name="address" placeholder="Enter the exact location or landmark..." required rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Upload Evidence</label>
+            <div class="file-upload-zone" onclick="document.getElementById('fileInput').click()">
+                <div class="upload-icon">📸</div>
+                <p>Click to upload a photo of the issue</p>
+                <input type="file" name="image" id="fileInput" required style="display:none;" onchange="updateFileName(this)">
+                <span id="fileNameDisplay" class="file-name"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-primary-lg" style="width: 100%;">Submit Report</button>
+    </form>
+</div>
+
+<script>
+function toggleOtherIssue() {
+    var select = document.getElementById('issueSelect');
+    var container = document.getElementById('otherIssueContainer');
+    var otherInput = document.getElementById('otherIssueInput');
+    
+    if (select.value === 'Other') {
+        container.style.display = 'block';
+        otherInput.required = true;
+        otherInput.focus();
+    } else {
+        container.style.display = 'none';
+        otherInput.required = false;
+    }
+}
+
+function updateFileName(input) {
+    var display = document.getElementById('fileNameDisplay');
+    if (input.files && input.files[0]) {
+        display.innerText = "Selected: " + input.files[0].name;
+    }
+}
+</script>
+
+{% endblock %}

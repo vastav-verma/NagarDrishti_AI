@@ -1,0 +1,33 @@
+{% extends "citizen/layout.html" %}
+{% block content %}
+
+<h2>My Complaints</h2>
+
+<table>
+<tr>
+    <th>Issue</th>
+    <th>Address</th>
+    <th>Image</th>
+    <th>Status</th>
+    <th>Severity</th>
+</tr>
+
+{% for c in complaints %}
+<tr>
+    <td>{{ c.issue }}</td>
+    <td>{{ c.address }}</td>
+    <td>
+        {% if c.image %}
+        <img src="{{ url_for('static', filename='uploads/' ~ c.image) }}" alt="Complaint Image" style="width:100px; height:auto; border-radius:8px;">
+        {% else %}
+        No Image
+        {% endif %}
+    </td>
+    <td>{{ c.status }}</td>
+    <td>{{ c.severity or 'N/A' }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "government/layout.html" %}
+{% block content %}
+
+<div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <div>
+        <h2 style="font-size: 2rem; font-weight: 800;">Citizen Complaints</h2>
+        <p style="color: var(--secondary);">Manage and resolve reported civic issues.</p>
+    </div>
+    
+    <div class="filter-group">
+        <button class="filter-btn active" onclick="filterSeverity('All', this)">All</button>
+        <button class="filter-btn" onclick="filterSeverity('High', this)">High Priority</button>
+        <button class="filter-btn" onclick="filterSeverity('Moderate', this)">Moderate</button>
+        <button class="filter-btn" onclick="filterSeverity('Low', this)">Low</button>
+    </div>
+</div>
+
+<div class="table-container" style="background: white; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden;">
+    <table id="complaintsTable" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background: #f8fafc; border-bottom: 2px solid var(--border);">
+                <th style="padding: 16px; text-align: left;">Issue Type</th>
+                <th style="padding: 16px; text-align: left;">Location</th>
+                <th style="padding: 16px; text-align: center;">Evidence</th>
+                <th style="padding: 16px; text-align: center;">Severity</th>
+                <th style="padding: 16px; text-align: center;">Status</th>
+                <th style="padding: 16px; text-align: right;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in complaints %}
+            <tr data-severity="{{ c.severity }}" style="border-bottom: 1px solid var(--border); transition: 0.2s;">
+                <td style="padding: 16px;">
+                    <div style="font-weight: 600;">{{ c.issue }}</div>
+                </td>
+                <td style="padding: 16px; color: var(--secondary); max-width: 250px;">{{ c.address }}</td>
+                <td style="padding: 16px; text-align: center;">
+                    {% if c.image %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ c.image) }}" alt="Issue" style="width:60px; height:60px; object-fit: cover; border-radius:8px; border: 1px solid var(--border);">
+                    {% else %}
+                    <span style="font-size: 0.8rem; color: #cbd5e1;">No Image</span>
+                    {% endif %}
+                </td>
+                <td style="padding: 16px; text-align: center;">
+                    <span class="badge badge-{{ c.severity|lower or 'na' }}">
+                        {{ c.severity or 'N/A' }}
+                    </span>
+                </td>
+                <td style="padding: 16px; text-align: center;">
+                    <span class="status-indicator {{ 'status-resolved' if c.status == 'Resolved' else 'status-pending' }}">
+                        {{ c.status }}
+                    </span>
+                </td>
+                <td style="padding: 16px; text-align: right;">
+                    {% if c.status != 'Resolved' %}
+                    <a href="{{ url_for('resolve', id=c.id) }}" class="btn-resolve">Mark Resolved</a>
+                    {% else %}
+                    <span style="color: var(--success); font-weight: 600;">✓ Completed</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+function filterSeverity(level, btn) {
+    // Update active button UI
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Filter rows
+    var rows = document.querySelectorAll('#complaintsTable tbody tr');
+    rows.forEach(row => {
+        if(level === 'All' || row.dataset.severity === level){
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+</script>
+
+{% endblock %}

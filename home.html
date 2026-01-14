@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NagarDrishti AI | Smart City Reporting</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&display=swap" rel="stylesheet">
+</head>
+<body class="home-page">
+
+<header class="header">
+    <div class="logo" style="display: flex; align-items: center; gap: 12px;">
+        <div class="logo-icon" style="background: #4f46e5; color: white; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 800; flex-shrink: 0;">
+            ND
+        </div>
+        <h1 style="font-size: 1.5rem; font-weight: 800; margin: 0; white-space: nowrap; letter-spacing: -0.5px;">
+            NagarDrishti AI
+        </h1>
+    </div>
+    <div class="top-right-buttons">
+        <button class="btn-secondary" onclick="openModal('login')">Login</button>
+        <button class="btn-primary" onclick="openModal('register')">Get Started</button>
+    </div>
+</header>
+
+<main class="content">
+    
+    <section class="hero-section">
+        <div class="hero-text">
+            <span style="background: #e0e7ff; color: #4f46e5; padding: 6px 16px; border-radius: 50px; font-weight: 600; font-size: 0.85rem;">AI-Powered Governance</span>
+            <h1>Build a <span>Better City</span> with Intelligence</h1>
+            <p>Report potholes, garbage, or leaks in seconds. Our AI ensures your voice reaches the right department instantly.</p>
+            <div class="hero-cta" style="display: flex; align-items: center; gap: 20px;">
+                <button class="btn-primary-lg" onclick="openModal('login')">Report an Issue Now</button>
+                <div style="font-size: 0.9rem; color: #64748b;">
+                    <span style="color: #10b981;">●</span> <b>10</b> issues resolved
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            <div style="display: flex; gap: 6px; margin-bottom: 20px;">
+                <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
+                <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
+                <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
+            </div>
+            <div class="mock-bar" style="width: 60%;"></div>
+            <div class="mock-row">
+                <div class="mock-box" style="background: #e0e7ff; border: 1px solid #c7d2fe;"></div>
+                <div class="mock-box"></div>
+            </div>
+            <div class="mock-bar" style="width: 90%;"></div>
+            <div class="mock-bar" style="width: 75%;"></div>
+            <div class="mock-bar" style="width: 40%;"></div>
+        </div>
+    </section>
+
+    <section class="features" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 0 8% 100px;">
+        <div class="feature-card" style="background: white; padding: 40px; border-radius: 24px; box-shadow: var(--shadow); border: 1px solid var(--border);">
+            <div style="font-size: 2.5rem; margin-bottom: 20px;">📍</div>
+            <h3 style="margin-bottom: 10px;">Smart Tracking</h3>
+            <p style="color: var(--secondary);">Automatic geolocation tagging for every report submitted.</p>
+        </div>
+        <div class="feature-card" style="background: white; padding: 40px; border-radius: 24px; box-shadow: var(--shadow); border: 1px solid var(--border);">
+            <div style="font-size: 2.5rem; margin-bottom: 20px;">🤖</div>
+            <h3 style="margin-bottom: 10px;">AI Routing</h3>
+            <p style="color: var(--secondary);">Instant categorization to get your issue to the right desk.</p>
+        </div>
+        <div class="feature-card" style="background: white; padding: 40px; border-radius: 24px; box-shadow: var(--shadow); border: 1px solid var(--border);">
+            <div style="font-size: 2.5rem; margin-bottom: 20px;">📊</div>
+            <h3 style="margin-bottom: 10px;">Live Status</h3>
+            <p style="color: var(--secondary);">Track progress from submission to resolution in real-time.</p>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="font-size: 2rem; margin-bottom: 40px; text-align: center;">Frequently Asked Questions</h2>
+        <div class="faq">
+            <div class="faq-item">
+                <button class="faq-question">How does CivicSense AI work? <span>▾</span></button>
+                <div class="faq-answer">
+                    <p style="padding-bottom: 20px;">Submit a photo and address → AI analyzes severity → Government routes the task → Resolution.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Is my data secure? <span>▾</span></button>
+                <div class="faq-answer">
+                    <p style="padding-bottom: 20px;">Yes, we encrypt all personal information and only share details necessary for repairs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="modal" id="authModal">
+    <div class="auth-panel">
+        <span onclick="closeModal()" class="close">×</span>
+        <div id="loginPanel">
+            <h2>Welcome Back</h2>
+            <p style="color: var(--secondary); margin-bottom: 30px;">Access your civic dashboard</p>
+            <form action="/login" method="POST">
+                <select name="role" required>
+                    <option value="citizen">Citizen</option>
+                    <option value="government">Government Official</option>
+                </select>
+                <input name="email" type="email" placeholder="Email Address" required>
+                <input name="password" type="password" placeholder="Password" required>
+                <button class="btn-primary-full">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 20px; font-size: 0.9rem;">New user? <span onclick="showRegister()" style="color: var(--primary); cursor: pointer; font-weight: 600;">Create account</span></p>
+        </div>
+        <div id="registerPanel" style="display:none;">
+            <h2>Create Account</h2>
+            <p style="color: var(--secondary); margin-bottom: 30px;">Join your city movement</p>
+            <form action="/register" method="POST">
+                <input name="email" type="email" placeholder="Email Address" required>
+                <input name="password" type="password" placeholder="Password" required>
+                <button class="btn-primary-full">Register</button>
+            </form>
+            <p style="text-align: center; margin-top: 20px; font-size: 0.9rem;">Already registered? <span onclick="showLogin()" style="color: var(--primary); cursor: pointer; font-weight: 600;">Back to Login</span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal(panel) {
+        document.getElementById("authModal").style.display = "flex";
+        panel === 'login' ? showLogin() : showRegister();
+    }
+    function closeModal() { document.getElementById("authModal").style.display = "none"; }
+    function showLogin() {
+        document.getElementById("loginPanel").style.display = "block";
+        document.getElementById("registerPanel").style.display = "none";
+    }
+    function showRegister() {
+        document.getElementById("loginPanel").style.display = "none";
+        document.getElementById("registerPanel").style.display = "block";
+    }
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.parentElement.classList.toggle('active');
+        });
+    });
+</script>
+
+</body>
+</html>
